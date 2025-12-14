@@ -1,0 +1,114 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoid = char:WaitForChild("Humanoid")
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+-- Refresh character when respawn
+player.CharacterAdded:Connect(function(c)
+	char = c
+	humanoid = c:WaitForChild("Humanoid")
+	hrp = c:WaitForChild("HumanoidRootPart")
+end)
+
+-- ScreenGui
+local gui = Instance.new("ScreenGui", player.PlayerGui)
+gui.Name = "FunctionGUI"
+
+-- Frame
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 360, 0, 360)
+frame.Position = UDim2.new(0.5, -180, 0.5, -180)
+frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+frame.Active = true
+frame.Draggable = true
+
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0,15)
+
+-- Grid
+local grid = Instance.new("UIGridLayout", frame)
+grid.CellSize = UDim2.new(0,100,0,100)
+grid.CellPadding = UDim2.new(0,10,0,10)
+grid.HorizontalAlignment = Enum.HorizontalAlignment.Center
+grid.VerticalAlignment = Enum.VerticalAlignment.Center
+
+-- States
+local speedOn, jumpOn, flyOn, invisOn, noclipOn = false,false,false,false,false
+local flyBV, flyBG
+
+-- Button creator
+local function createButton(text, func)
+	local btn = Instance.new("TextButton", frame)
+	btn.Text = text
+	btn.TextScaled = true
+	btn.TextColor3 = Color3.fromRGB(255,255,255)
+	btn.BackgroundColor3 = Color3.fromRGB(45,45,45)
+	btn.BorderSizePixel = 0
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0,12)
+	btn.MouseButton1Click:Connect(func)
+end
+
+-- 1 Ultra
+createButton("Ultra God", function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main.TRINITIUM.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main.TRINITIUM.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 2 Ultra
+createButton("Super Ultra", function()
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["SUPER DUPERS"].Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["SUPER DUPERS"].Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 3 Monster
+createButton("MONSTER", function()
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main.REIONICS.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main.REIONICS.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 4 MultiVerse
+createButton("MULTIVERSE", function()
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main.MULTIVERSALS.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main.MULTIVERSALS.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 5 Evil Ultra
+createButton("Evil Ultra", function()
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["EVIL ULTRAS"].Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["EVIL ULTRAS"].Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 6 SEIJIN
+createButton("SEIJIN", function()
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main.SEIJIN.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main.SEIJIN.Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 7 UltraSuits
+createButton("ULTRA SUITS", function()
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["ULTRA SUITS"].Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.CharacterSelection.Main["F2P ULTRAS"].Visible=false
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["ULTRA SUITS"].Visible=true
+game:GetService("Players").LocalPlayer.PlayerGui.MenuCharacterSelection.Main["F2P ULTRAS"].Visible=false
+end)
+
+-- 8 Reset
+createButton("Reset", function()
+	humanoid.Health = 0
+end)
+
+-- 9 Close GUI
+createButton("Close", function()
+	gui:Destroy()
+end)
